@@ -47,7 +47,7 @@ class Word extends Component {
     };
 
     handleEnterKeyPress(ev) {
-        if (ev.key === 'Enter') {
+        if (ev.key === 'Enter' && !this.props.multiline) {
             this.handleRequest();
             ev.preventDefault();
         }
@@ -57,6 +57,7 @@ class Word extends Component {
         this.setState({disabled: true});
         APITest(this.state.query, this.props.api).then(response => {
             let prepareData = [];
+            response = response.split('\n');
             for (let idx in response) {
                 prepareData.push({key: idx, label: response[idx]});
             }
@@ -82,8 +83,9 @@ class Word extends Component {
                 </Typography>
                 <TextField className={classes.textField}
                     id="queryWord"
-                    label="请输入"
+                    label=""
                     margin="dense"
+                    multiline={this.props.multiline}
                     value={this.state.query}
                     onChange={this.handleChange('query')}
                     onKeyPress={(ev) => this.handleEnterKeyPress(ev)}
@@ -93,7 +95,7 @@ class Word extends Component {
                 <Button className={classes.button} raised color="primary"
                     onClick={() => this.handleRequest()}
                     disabled={this.state.disabled}>
-                    查询
+                    Get
                 </Button>
                 <div className={classes.row}>
                     {

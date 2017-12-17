@@ -6,7 +6,9 @@ import Toolbar from 'material-ui/Toolbar';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Query from './Query';
-import {TEST} from './config';
+import {
+    TEST,WORD2WORD,WORD2SENTENCE,SENTENCE2SENTENCE,SENTENCE2PIECE, PIECE2PIECE
+} from './config';
 
 const styles = theme => ({
     root: {
@@ -42,7 +44,22 @@ class App extends Component {
         return (<div className={classes.root}>
             {appBar}
             <Paper className={classes.paper}>
-                <Query title='测试' api={TEST}/>
+                <Query title='Test' api={TEST}/>
+            </Paper>
+            <Paper className={classes.paper}>
+                <Query title='Word -> Word' api={WORD2WORD}/>
+            </Paper>
+            <Paper className={classes.paper}>
+                <Query title='Word -> Sentence' api={WORD2SENTENCE}/>
+            </Paper>
+            <Paper className={classes.paper}>
+                <Query title='Sentence -> Sentence' api={SENTENCE2SENTENCE}/>
+            </Paper>
+            <Paper className={classes.paper}>
+                <Query title='Sentence -> Piece' api={SENTENCE2PIECE}/>
+            </Paper>
+            <Paper className={classes.paper}>
+                <Query title='Piece -> Piece' api={PIECE2PIECE} multiline={true}/>
             </Paper>
         </div>);
     }
