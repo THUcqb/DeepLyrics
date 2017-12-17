@@ -1,3 +1,2 @@
-export const URL = "http://deeplyrics.eastasia.cloudapp.azure.com:8000";
-export const WORD = "/word";
-export const SEQ2SEQ = "/seq2seq";
+export const URL = "http://166.111.73.20:8000";
+export const TEST = "/test";

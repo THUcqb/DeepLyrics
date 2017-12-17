@@ -1,30 +1,13 @@
-from flask import Flask
-from flask import request, jsonify
+from flask import Flask, request
 from flask_cors import CORS
-import seq2seq
-import rhythm
 
 app = Flask(__name__)
 cors = CORS(app)
 
-@app.route('/word')
-def generate_word():
-    line = request.args.get('line').strip()
-    if line == '': return jsonify([])
-    ans = rhythm.predict_phrase_embedding(line, 100)
-    ans = list(ans.values())[0]
-    if ans == []:
-        ans = rhythm.predict_phrase_2gram(line, 100)
-#    print(line, ans)
-    return jsonify(ans)
-
-@app.route('/seq2seq')
-def generate_sentence():
-    line = request.args.get('line').strip()
-    if line == '': return jsonify([])
-    ans = seq2seq.predict(line)
-#    print(line, ans)
-    return jsonify(ans)
+@app.route("/test", methods=['GET'])
+def apitest():
+    print('apitest', request.values.get('query'))
+    return "Test OK."
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8000)
